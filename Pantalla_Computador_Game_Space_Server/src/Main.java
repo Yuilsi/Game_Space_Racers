@@ -34,6 +34,7 @@ public class Main extends PApplet {
 	}
 
 	public void setup() {
+		initServer();
 		screen = 1;
 		homeview = new HomeView(this);
 		instructionsview = new InstructionsView(this);
@@ -95,7 +96,7 @@ public class Main extends PApplet {
 	public void mousePressed() {
 
 		Message("Click desde el cliente");
-	
+		
 		switch (screen) {
 		case 1:
 			screen = homeview.switchScreen();
@@ -144,6 +145,7 @@ public class Main extends PApplet {
 					System.out.println("Esperando...");
 					String line = reader.readLine();
 					System.out.println("Recibid0" + line);
+					
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
