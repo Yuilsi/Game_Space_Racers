@@ -1,3 +1,4 @@
+package view;
 
 import processing.core.PApplet;
 
@@ -19,6 +20,7 @@ public class Main extends PApplet {
 	private int screen;
 	private HomeView homeview;
 	private InstructionsView instructionsview;
+	private Map mapview;
 	private Socket socket;
 	private BufferedReader reader;
 	private BufferedWriter writer;
@@ -38,6 +40,7 @@ public class Main extends PApplet {
 		screen = 1;
 		homeview = new HomeView(this);
 		instructionsview = new InstructionsView(this);
+		mapview = new Map(this);
 
 	}
 		
@@ -62,15 +65,15 @@ public class Main extends PApplet {
 
 			break;
 		case 5:
-			// mapview.drawScreen(screen);
+			 mapview.drawScreen(screen);
 			// new Thread (mapview).start();
 			// screen = mapview.switchScreen();
-			// screen = mapview.drawScreen(screen);
+			screen = mapview.drawScreen(screen);
 			break;
 
 		case 6:
-			// mapview.drawScreen(screen);
-			// screen = mapview.drawScreen(screen);
+			mapview.drawScreen(screen);
+			screen = mapview.drawScreen(screen);
 			// mapview.time();
 			// screen = mapview.switchScreen();
 			break;
@@ -115,7 +118,7 @@ public class Main extends PApplet {
 			break;
 
 		case 6:
-			// screen = mapview.switchScreen(screen);
+			 screen = mapview.switchScreen(screen);
 			break;
 		default:
 			break;
