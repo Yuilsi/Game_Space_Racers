@@ -25,8 +25,8 @@ public class SpaceRacers {
 		//caracteristicas de personaje (Poscion inicial y tamaño de la imagen del personaje)
         ovni1 = new Ovni1("Img/Character.png", 110, 20, app);
 		
-        ovni1.centerX = 133;
-        ovni1.centerY = 634;
+        ovni1.centerX = 110;
+        ovni1.centerY = 400;
 		rightMargin = 300;
 		leftMargin = 0;
 		posXbg = 0;
@@ -105,7 +105,7 @@ public class SpaceRacers {
 				} else if (c.changeY < 0) {
 					c.setTop(collided.getBottom(150), 71);
 				}
-				c.changeY = 0;
+			//	c.changeY = 0;
 			}
 
 			c.centerX += c.changeX;
@@ -121,7 +121,7 @@ public class SpaceRacers {
 					c.setLeft(collided.getRight(150), 66);
 
 				}
-
+				c.changeX = 0;
 			}
 			if (col_list.size() == 1) {
 				col_list.remove(0);
@@ -150,7 +150,7 @@ public class SpaceRacers {
 	//-------------------------------------------------------------------------------------------------------------------	
 		
 	public void moveOvni() {
-		if ((ovni1.getCenterX() > leftMargin && ovni1.getCenterX() < rightMargin)|| (posXbg <= -1152)|| (posYbg <= -700)) {
+		if ((ovni1.getCenterX() > leftMargin && ovni1.getCenterX() < rightMargin)|| (posXbg <= -500)) {
 
 			new Thread(ovni1).start();
 		}
@@ -167,16 +167,18 @@ public class SpaceRacers {
 
 		if (app.keyPressed == true ) {
 			
-			if (ovni1.getCenterY() > leftMargin && app.keyCode == PConstants.UP && posYbg <= -700 && posYbg >= 16233) {
+			
+			if (ovni1.getCenterY() > leftMargin && app.keyCode == PConstants.UP && posYbg <= 700 && posYbg >= -16233) {
 				for (int i = 0; i < obstaclesList.size(); i++) {
-					obstaclesList.get(i).goBackMap();
+					obstaclesList.get(i).advanceMap();
 				}
 
-				posYbg += 4;
+				posYbg += 2;
 			}
 		}
 		
 		System.out.println(posYbg);
+		System.out.println(posXbg);
 	}
 	
 	
@@ -193,12 +195,14 @@ public class SpaceRacers {
 		this.posXbg = posXbg;
 	}
 	public float getPosYbg() {
-		return posXbg;
+		return posYbg;
 	}
 
-	public void setPosYbg(float posXbg) {
-		this.posXbg = posXbg;
+	public void setPosYbg(float posYbg) {
+		this.posYbg = posYbg;
 	}
+	
+	
 }
 
 

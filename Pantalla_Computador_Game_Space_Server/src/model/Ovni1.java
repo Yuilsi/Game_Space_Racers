@@ -12,7 +12,7 @@ public class Ovni1 extends Elements implements Runnable {
 
 	public Ovni1(String filename, float posX, float posY, PApplet app) {
 		super(filename, posX, posY, app);
-		speed = (float) 4;
+		speed = (float) 1;
 		ovniImg = app.loadImage(filename);
 		this.app = app;
 		centerX = 90;

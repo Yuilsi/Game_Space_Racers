@@ -97,17 +97,7 @@ public class Main extends PApplet {
 			screen = instructionsview.switchScreen();
 			break;
 		case 3:
-		
-			break;
-		case 4:
-
-			break;
-		case 5:
-
-			break;
-
-		case 6:
-		//	 screen = mapview.switchScreen(screen);
+		//	screen = mapview.switchScreen(screen);
 			break;
 		default:
 			break;
