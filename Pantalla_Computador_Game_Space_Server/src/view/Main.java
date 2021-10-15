@@ -66,24 +66,13 @@ public class Main extends PApplet {
 			break;
 		case 5:
 			 mapview.drawScreen(screen);
-			// new Thread (mapview).start();
-			// screen = mapview.switchScreen();
-			screen = mapview.drawScreen(screen);
+			 new Thread (mapview).start();
+			 screen = mapview.drawScreen(screen);
 			break;
 
 		case 6:
 			mapview.drawScreen(screen);
 			screen = mapview.drawScreen(screen);
-			// mapview.time();
-			// screen = mapview.switchScreen();
-			break;
-
-		case 7:
-			// mapview.drawScreen(screen);
-			// screen = mapview.drawScreen(screen);
-			// nicknameview.hideCp5();
-			// mapview.kilometros();
-			// screen = mapview.switchScreen();
 			break;
 
 		default:
@@ -108,7 +97,7 @@ public class Main extends PApplet {
 			screen = instructionsview.switchScreen();
 			break;
 		case 3:
-
+		
 			break;
 		case 4:
 
@@ -118,13 +107,38 @@ public class Main extends PApplet {
 			break;
 
 		case 6:
-			 screen = mapview.switchScreen(screen);
+		//	 screen = mapview.switchScreen(screen);
 			break;
 		default:
 			break;
 		}
 	}
 
+	
+	public void keyPressed() {
+		switch (screen) {
+		case 5:
+			mapview.moveCaveman(screen);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	public void keyReleased() {
+		switch (screen) {
+		case 5:
+			mapview.stopCaveman(screen);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	
+	
 	public void initServer() {
 
 		new Thread(() -> {
@@ -177,4 +191,6 @@ public class Main extends PApplet {
 		return writer;
 	}
 
+	
+	
 }

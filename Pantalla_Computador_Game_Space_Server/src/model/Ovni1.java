@@ -28,7 +28,7 @@ public class Ovni1 extends Elements implements Runnable {
 
 	}
 
-	private void directionCaveman() {
+	private void directionOvni() {
 		
 		if (app.keyCode == PConstants.RIGHT) {
 
@@ -37,16 +37,31 @@ public class Ovni1 extends Elements implements Runnable {
 		} else if (app.keyCode == PConstants.LEFT) {
 
 			changeX = -speed;
+			
+		} else if (app.keyCode == PConstants.UP) {
+
+			changeY = -speed;
 		}
 
 	}
 
-	
+	public void releasedKey() {
+		if (app.keyCode == PConstants.RIGHT) {
+			changeX = 0;
+		}
+
+		if (app.keyCode == PConstants.LEFT) {
+			changeX = 0;
+		}
+		if (app.keyCode == PConstants.UP) {
+			changeY = 0;
+		}
+	}
 
 	@Override
 	public void run() {
 
-		directionCaveman();
+		directionOvni();
 
 		try {
 
