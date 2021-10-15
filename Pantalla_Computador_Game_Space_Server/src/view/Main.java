@@ -27,8 +27,6 @@ public class Main extends PApplet {
 
 	public static void main(String[] args) {
 		PApplet.main(Main.class.getName());
-		// TODO Auto-generated method stub
-
 	}
 
 	public void settings() {
@@ -43,14 +41,11 @@ public class Main extends PApplet {
 		mapview = new Map(this);
 
 	}
-		
-
-		
-	
 
 	public void draw() {
 		background(0);
 
+		//Metodos para pasar pantallas
 		switch (screen) {
 		case 1:
 			homeview.drawScreen();
@@ -83,8 +78,6 @@ public class Main extends PApplet {
 	}
 	
 
-
-
 	public void mousePressed() {
 
 		Message("Click desde el cliente");
@@ -103,12 +96,11 @@ public class Main extends PApplet {
 			break;
 		}
 	}
-
 	
 	public void keyPressed() {
 		switch (screen) {
 		case 5:
-			mapview.moveCaveman(screen);
+			mapview.moveOvni(screen);
 			break;
 
 		default:
@@ -119,7 +111,7 @@ public class Main extends PApplet {
 	public void keyReleased() {
 		switch (screen) {
 		case 5:
-			mapview.stopCaveman(screen);
+			mapview.stopOvni(screen);
 			break;
 
 		default:

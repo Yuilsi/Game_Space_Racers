@@ -26,31 +26,25 @@ public class Map implements Runnable {
 	
 		if (screen == 5) {
 			app.imageMode(PApplet.CORNER);
-			app.image(map,0,spaceRacers.getPosYbg());            //por el momento el fondo se ve raro porque no se ha puesto a mover el fondo
+			app.image(map,0,spaceRacers.getPosYbg());   //lo que me esta dando dolor de cabeza
 			app.imageMode(PApplet.CENTER);
 			spaceRacers.drawObstacles();
 		}
-
 		return screen;
 
 	}
 
-	
-
-	public void moveCaveman(int screen) {
+	public void moveOvni(int screen) {
 		if (screen != 6) {
 			spaceRacers.moveOvni();
 		}
-
-
 	}
 
-	public void stopCaveman(int screen) {
+	public void stopOvni(int screen) {
 
 		if (screen != 6) {
 			spaceRacers.releasedKey();
 		}
-
 	}
 
 	@Override
@@ -64,16 +58,4 @@ public class Map implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-	
-	/*
-	 * if (s >= 59) { m = 0; s = 0; app.text(m + ":" + s + ":" + mil, 1110, 42); }
-	 */
-
-	
-
-	// --------------------------------------------------------------------------------------------------------------------------
-
 }
