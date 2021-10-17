@@ -4,16 +4,12 @@ import processing.core.PApplet;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
+
+import model.Session;
+import model.SpaceRacers;
 
 public class Main extends PApplet {
 
@@ -21,10 +17,9 @@ public class Main extends PApplet {
 	private HomeView homeview;
 	private InstructionsView instructionsview;
 	private Map mapview;
-	private Socket socket;
 	private BufferedReader reader;
 	private BufferedWriter writer;
-
+	
 	public static void main(String[] args) {
 		PApplet.main(Main.class.getName());
 	}
@@ -34,7 +29,7 @@ public class Main extends PApplet {
 	}
 
 	public void setup() {
-		initServer();
+		
 		screen = 1;
 		homeview = new HomeView(this);
 		instructionsview = new InstructionsView(this);
@@ -45,7 +40,7 @@ public class Main extends PApplet {
 	public void draw() {
 		background(0);
 
-		//Metodos para pasar pantallas
+		// Metodos para pasar pantallas
 		switch (screen) {
 		case 1:
 			homeview.drawScreen();
@@ -60,9 +55,9 @@ public class Main extends PApplet {
 
 			break;
 		case 5:
-			 mapview.drawScreen(screen);
-			 new Thread (mapview).start();
-			 screen = mapview.drawScreen(screen);
+			mapview.drawScreen(screen);
+			new Thread(mapview).start();
+			screen = mapview.drawScreen(screen);
 			break;
 
 		case 6:
@@ -76,12 +71,10 @@ public class Main extends PApplet {
 
 		text("x:" + mouseX + "y:" + mouseY, mouseX, mouseY);
 	}
-	
 
 	public void mousePressed() {
 
-		Message("Click desde el cliente");
-		
+
 		switch (screen) {
 		case 1:
 			screen = homeview.switchScreen();
@@ -90,13 +83,13 @@ public class Main extends PApplet {
 			screen = instructionsview.switchScreen();
 			break;
 		case 3:
-		//	screen = mapview.switchScreen(screen);
+			// screen = mapview.switchScreen(screen);
 			break;
 		default:
 			break;
 		}
 	}
-	
+
 	public void keyPressed() {
 		switch (screen) {
 		case 5:
@@ -107,7 +100,7 @@ public class Main extends PApplet {
 			break;
 		}
 	}
-	
+
 	public void keyReleased() {
 		switch (screen) {
 		case 5:
@@ -118,61 +111,4 @@ public class Main extends PApplet {
 			break;
 		}
 	}
-	
-	
-	
-	public void initServer() {
-
-		new Thread(() -> {
-
-			try {
-				// 1. Se espera la conexión
-				ServerSocket server = new ServerSocket(5000);
-				System.out.println("Esperando conexión");
-				socket = server.accept();
-				// 3.Cliente y server conectados
-				System.out.println("Cliente conectado");
-				InputStream is = socket.getInputStream();
-
-				InputStreamReader isr = new InputStreamReader(is);
-
-				reader = new BufferedReader(isr);
-			    OutputStream out =  socket.getOutputStream();
-				OutputStreamWriter osw = new OutputStreamWriter(out);
-				writer = new BufferedWriter(osw);
-				while (true) {
-					System.out.println("Esperando...");
-					String line = reader.readLine();
-					System.out.println("Recibid0" + line);
-					
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}).start();
-	}
-//Error aquí
-	public void Message(String msg) {
-        new Thread(
-                () -> {
-                    try {
-                        writer.write(msg + "\n");
-                        writer.flush();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-        ).start();
-  
-	
-	}
-	
-	public BufferedWriter getWriter() {
-		return writer;
-	}
-
-	
-	
 }

@@ -2,8 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import model.Session;
 import processing.core.PApplet;
 import processing.core.PConstants;
+import model.TCPLauncher;
 
 public class SpaceRacers {
 	private PApplet app;
@@ -34,6 +37,11 @@ public class SpaceRacers {
 		
 		createObstacles("Data/GridMap.csv");
 		
+		tcplauncher = TCPLauncher.getInstance();
+		tcplauncher.setServidor(this);
+		tcplauncher.start();
+		
+		
 	}
 	
 	
@@ -44,7 +52,7 @@ public class SpaceRacers {
 		return onlyInstance;
 	}
 	
-
+	private TCPLauncher tcplauncher;
 	
 	public void drawObstacles() {
 
@@ -180,7 +188,14 @@ public class SpaceRacers {
 		System.out.println(posYbg);
 		System.out.println(posXbg);
 	}
-	
+	public void mensaje(Session session, String mensaje) {
+		System.out.println("Mensaje recibido de: " + mensaje);
+		Gson gson = new Gson();
+		//Movimiento jugadorReader = gson.fromJson(mensaje, Movimiento.class);
+		
+
+		//session.setMovimiento(jugadorReader);
+	}
 	
 	
 	
@@ -200,8 +215,7 @@ public class SpaceRacers {
 
 	public void setPosYbg(float posYbg) {
 		this.posYbg = posYbg;
-	}
-	
+	}	
 	
 }
 
