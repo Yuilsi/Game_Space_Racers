@@ -69,7 +69,7 @@ public class Main extends PApplet {
 			break;
 		}
 
-		text("x:" + mouseX + "y:" + mouseY, mouseX, mouseY);
+		//text("x:" + mouseX + "y:" + mouseY, mouseX, mouseY);
 	}
 
 	public void mousePressed() {
