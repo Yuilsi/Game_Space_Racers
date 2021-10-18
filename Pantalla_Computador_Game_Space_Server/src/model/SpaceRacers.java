@@ -26,24 +26,22 @@ public class SpaceRacers {
 		obstaclesList = new ArrayList<>();
 		
 		//caracteristicas de personaje (Poscion inicial y tamaño de la imagen del personaje)
-        ovni1 = new Ovni1("Img/Character.png", 110, 20, app);
+        ovni1 = new Ovni1("Img/Character.png", 101, 20, app);
 		
-        ovni1.centerX = 110;
-        ovni1.centerY = 400;
+        ovni1.centerX = 101;
+        ovni1.centerY = 500;
 		rightMargin = 300;
 		leftMargin = 0;
 		posXbg = 0;
-		posYbg = 0;
+		posYbg = -15506;
 		
 		createObstacles("Data/GridMap.csv");
-		
 		tcplauncher = TCPLauncher.getInstance();
 		tcplauncher.setServidor(this);
 		tcplauncher.start();
 		
 		
 	}
-	
 	
 	public static SpaceRacers getInstance(PApplet app) {
 		if (onlyInstance == null) {
@@ -58,10 +56,7 @@ public class SpaceRacers {
 
 		ovni1.draw();
 		scrollMap();
-
-		
 		resolvePlatformCollisions(ovni1, obstaclesList);
-
 		for (Obstacles o : obstaclesList) {
 			o.draw();
 		}
@@ -75,7 +70,7 @@ public class SpaceRacers {
 		public boolean checkCollision(Ovni1 c, Obstacles o1) { // se supone que deben chacer el ovni con el
 																	// obstaculo
 			boolean hNoverlap = c.getRight(66) <= o1.getLeft(150) || c.getLeft(66) >= o1.getRight(150);
-			boolean VNoverlap = c.getBottom(71) <= o1.getTop(150) || c.getTop(71) >= o1.getBottom(150);
+			boolean VNoverlap = c.getBottom(46) <= o1.getTop(150) || c.getTop(71) >= o1.getBottom(150);
 			if (hNoverlap || VNoverlap) {
 				return false;
 			} else {
@@ -91,50 +86,25 @@ public class SpaceRacers {
 				if (checkCollision(c, p))
 					collision_list.add(p);
 			}
-
 			return collision_list;
 		}
-	
-		
-		
 		public void resolvePlatformCollisions(Ovni1 c, ArrayList<Obstacles> walls) {
-
-			c.changeY += c.changeY;
-
 			c.centerY += c.changeY;
-
 			ArrayList<Obstacles> col_list = checkCollisionList(c, walls);
-
+			//AQUI SI CHOCO CON LOS OBTACULOS EJE Y ,GAME OVER
 			if (col_list.size() > 0) {
-				Obstacles collided = col_list.get(0);
-				if (c.changeY > 0) {
-					c.setBottom(collided.getTop(150), 71);
-					
-				} else if (c.changeY < 0) {
-					c.setTop(collided.getBottom(150), 71);
-				}
-			//	c.changeY = 0;
+				System.out.println("PERDISTE");
+				app.text("GAME OVER",500, 350);
+			//GAME OVER //AQUI SE SUPONE QUE TENGO QUE PONERLE PERDER
 			}
 
 			c.centerX += c.changeX;
 			col_list = checkCollisionList(c, walls);
 
 			if (col_list.size() > 0) {
-				System.out.println(col_list.size());
-				Obstacles collided = col_list.get(0);
-				if (c.changeX > 0) {
-					c.setRight(collided.getLeft(150), 66);
-
-				} else if (c.changeX < 0) {
-					c.setLeft(collided.getRight(150), 66);
-
-				}
-				c.changeX = 0;
-			}
-			if (col_list.size() == 1) {
-				col_list.remove(0);
-			}
-
+				System.out.println("PERDISTE");
+				app.text("GAME OVER", 500, 350);
+			}	
 		}
 		
 		//-------------------------------------------------------------------------------------------------------------------
@@ -158,30 +128,23 @@ public class SpaceRacers {
 	//-------------------------------------------------------------------------------------------------------------------	
 		
 	public void moveOvni() {
-		if ((ovni1.getCenterX() > leftMargin && ovni1.getCenterX() < rightMargin)|| (posXbg <= -500)) {
-
+		if ((ovni1.getCenterX() > leftMargin && ovni1.getCenterX() < rightMargin)|| (posYbg <= 0)) {
 			new Thread(ovni1).start();
 		}
-
-
 	}
 	
 	public void releasedKey() {
-		
 		ovni1.releasedKey();
 	}
 	
 	public void scrollMap() {
 
 		if (app.keyPressed == true ) {
-			
-			
 			if (ovni1.getCenterY() > leftMargin && app.keyCode == PConstants.UP && posYbg <= 700 && posYbg >= -16233) {
 				for (int i = 0; i < obstaclesList.size(); i++) {
 					obstaclesList.get(i).advanceMap();
 				}
-
-				posYbg += 2;
+				posYbg += 8;
 			}
 		}
 		
@@ -196,12 +159,6 @@ public class SpaceRacers {
 
 		//session.setMovimiento(jugadorReader);
 	}
-	
-	
-	
-	
-	
-	
 	public float getPosXbg() {
 		return posXbg;
 	}

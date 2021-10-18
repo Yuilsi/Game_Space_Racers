@@ -62,7 +62,7 @@ public class Ovni1 extends Elements implements Runnable {
 	public void run() {
 
 		directionOvni();
-
+	
 		try {
 
 			Thread.sleep(10);

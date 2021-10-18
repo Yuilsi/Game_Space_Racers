@@ -22,11 +22,11 @@ public class Obstacles extends Elements{
 		  app.imageMode (PApplet.CENTER);
 		  
 		     app.image(obstacleImg, centerX, centerY);
-		     obstacleImg.resize(50,50);
+		     obstacleImg.resize(150,150);
 		  }
 	  
 	  public void advanceMap(){
-	     centerY -= 4;
+	     centerY += 4;
 	     ///centerY += changeY;
 	  }
 	  

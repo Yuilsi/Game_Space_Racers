@@ -18,7 +18,7 @@ public class Map implements Runnable {
 	public Map(PApplet app) {
 		this.app = app;
 		map = app.loadImage("Img/Map.png");
-		map.resize(1152,1623);
+		map.resize(1152,16221);
 		spaceRacers = new SpaceRacers (app);
 	}
 	
